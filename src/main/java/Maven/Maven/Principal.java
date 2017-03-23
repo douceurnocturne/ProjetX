@@ -17,7 +17,7 @@ public class Principal {
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				frame.setVisible(true);
+				frame.setVisible(true); 
 			}
 		});
 	}

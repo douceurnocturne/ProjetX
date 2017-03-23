@@ -1,4 +1,4 @@
-package Maven.Maven;
+package projetUMLv2.AA1;
 
 import java.util.HashSet;
 import java.util.List;
