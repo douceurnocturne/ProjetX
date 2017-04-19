@@ -23,6 +23,7 @@ public class Map {
 	private ImgManager imgManager; // ImgManager qui contient la liste des Img
 	private Component clickOnMap;
 	private ArrayList<CustomDefaultWaypoint> clickWaypointResults; 
+	private ArrayList<Img> ImgWaypointsResults;
 	// Liste qui contient
 																	// les
 																	// résultats
@@ -83,7 +84,18 @@ public class Map {
 																		// clic
 		return this.clickWaypointResults;
 	}
-
+	
+	public ArrayList<Img> getImgWaypointsResult() {
+		this.ImgWaypointsResults = new ArrayList<Img>();
+		
+		for (int i=0; i<this.getClickWaypointResult().size(); i++) {
+			int current_key = this.getClickWaypointResult().get(i).getKey();
+			this.ImgWaypointsResults.add(this.getImgList().get(current_key));
+		}
+		
+		return this.ImgWaypointsResults;
+	}
+	
 	public void addWaypoint(double coord_x, double coord_y, int key) { // ajoute
 																		// un
 																		// waypoint

@@ -4,8 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -27,14 +31,22 @@ public class Principal extends JFrame implements ActionListener {
 	private JPanel panel_L = new JPanel();
 
 	private JPanel panel_Down = new JPanel();
-
+	
+	
+	
 	private JScrollPane panel_scroll_l = new JScrollPane(panel_L);
 
 	public Principal() throws IOException {
 
 		// map
 		current_map = new Map();
-
+		
+		/*current_map.getMap().getMainMap().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				System.out.println("Clic sur la map");
+			}
+		}); pour marc */
+		
 		// Panel du bas avec des boutons
 
 		panel_Down.setLayout(new FlowLayout());
@@ -59,8 +71,9 @@ public class Principal extends JFrame implements ActionListener {
 		panel_R.setPreferredSize(new Dimension(200, 300));
 
 		// frame
-
-		add(current_map.getMap());
+		
+		add(current_map.getMap(), BorderLayout.CENTER);
+		
 		add(panel_scroll_l, BorderLayout.WEST);
 		add(panel_R, BorderLayout.EAST);
 
@@ -69,6 +82,7 @@ public class Principal extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -88,6 +102,10 @@ public class Principal extends JFrame implements ActionListener {
 			this.setVisible(false);
 			dispose();
 		}
+		
+		
+		
+		
 	}
 
 	public static void main(String[] args) {
@@ -105,4 +123,5 @@ public class Principal extends JFrame implements ActionListener {
 		});
 	}
 
+	
 }
