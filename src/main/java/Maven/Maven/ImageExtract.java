@@ -86,7 +86,7 @@ public class ImageExtract {
 			System.out.println("erreur 3");
 		}
 		// convertion dms to dd:
-		String[] tab0 = latitude.split("Â°");
+		String[] tab0 = latitude.split("°");
 		tab0[1] = tab0[1].substring(1, tab0[1].length());
 		String[] tab1 = tab0[1].split("'");
 		tab1[1] = tab1[1].substring(1, tab1[1].length() - 1);
