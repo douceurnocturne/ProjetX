@@ -26,6 +26,7 @@ public class ImgManager extends JPanel {
 				if (liste[i].endsWith(".jpg") || liste[i].endsWith(".gif") || liste[i].endsWith(".png")
 						|| liste[i].endsWith(".bnp") || liste[i].endsWith(".tif")) {
 					File f = new File(DIR_DATA_FILE, liste[i]).getCanonicalFile();
+					System.out.println((f));
 					float lon = ImageExtract.getLatitude(f);
 					float lat = ImageExtract.getLongitude(f);
 					Img im = new Img(f, lon, lat);

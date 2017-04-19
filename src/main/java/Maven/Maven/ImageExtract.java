@@ -20,9 +20,9 @@ import com.drew.metadata.exif.GpsDirectory;
 
 public class ImageExtract {
 
-	public static void main(String[] args) throws IOException {
-		Img bonsoir = LoadImage();
-	}
+//	public static void main(String[] args) throws IOException {
+//		Img bonsoir = LoadImage();
+//	}
 
 	public static Img LoadImage() throws IOException {
 		File repertoireCourant = null;
