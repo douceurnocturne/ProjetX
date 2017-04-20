@@ -19,7 +19,7 @@ import com.drew.metadata.exif.GpsDescriptor;
 import com.drew.metadata.exif.GpsDirectory;
 
 public class ImageExtract {
-
+	
 	public static Img LoadImage() throws IOException {
 		File repertoireCourant = null;
 		try {

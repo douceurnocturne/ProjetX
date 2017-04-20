@@ -10,6 +10,7 @@ import java.awt.Image;
 import javax.swing.JPanel;
 
 public class ImgManager extends JPanel {
+
 	public static final String DIR_DATA_NAME = "Donnees";
 	
 	public static final File DIR_DATA_FILE = new File(DIR_DATA_NAME);
@@ -34,6 +35,24 @@ public class ImgManager extends JPanel {
 				}
 			}
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void DataBaseClosed(ArrayList<Img> listImg){
+		File dossier;
+		try {
+			dossier = new File("Donnees").getCanonicalFile();
+			String[] liste = dossier.list();
+			for (int i = 0; i < liste.length; i++) {
+				File f = new File(DIR_DATA_FILE,liste[i]).getCanonicalFile();
+				Img image = new Img(f, ImageExtract.getLatitude(f), ImageExtract.getLongitude(f));
+				if (!(listImg.contains(image))){
+					f.delete();
+				}
+			} 
+		}
+		catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
