@@ -68,6 +68,7 @@ public class ImageExtract {
 	}
 
 	public static float getLatitude(File file) {
+		
 		String latitude = "";
 		try {
 			Metadata metadata = ImageMetadataReader.readMetadata(file);
@@ -86,10 +87,17 @@ public class ImageExtract {
 			System.out.println("erreur 3");
 		}
 		// convertion dms to dd:
+		System.out.println("latitude"+latitude);
+
 		String[] tab0 = latitude.split("°");
 		tab0[1] = tab0[1].substring(1, tab0[1].length());
 		String[] tab1 = tab0[1].split("'");
 		tab1[1] = tab1[1].substring(1, tab1[1].length() - 1);
+		//tab0[0]=tab0[0].replace(',', '.');
+		//tab1[0]=tab1[0].replace(',', '.');
+		//tab1[1]=tab1[1].replace(',', '.');
+		System.out.println("latitude"+latitude);
+		System.out.println(tab0[0]+" "+ tab1[0]+" "+tab1[1]);
 		float Degree = Integer.parseInt(tab0[0]);
 		float Minute = Integer.parseInt(tab1[0]);
 		float Second = Integer.parseInt(tab1[1]);
@@ -116,7 +124,8 @@ public class ImageExtract {
 			System.out.println("erreur 3");
 		}
 		// convertion dms to dd:
-		String[] tab0 = longitude.split("Â°");
+		System.out.println(longitude);
+		String[] tab0 = longitude.split("°");
 		tab0[1] = tab0[1].substring(1, tab0[1].length());
 		String[] tab1 = tab0[1].split("'");
 		tab1[1] = tab1[1].substring(1, tab1[1].length() - 1);

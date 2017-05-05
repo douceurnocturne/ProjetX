@@ -51,7 +51,7 @@ public class Map {
 		
 		this.painter = new CustomPainter();
 		this.map.getMainMap().setOverlayPainter(painter);
-
+		this.init();
 	}
 
 	public void paint() {
@@ -124,6 +124,9 @@ public class Map {
 
 		Img new_image = ImageExtract.LoadImage();
 		this.imgManager.imgList.add(new_image);
+		System.out.println("latitude");
+		System.out.println("longitude");
+
 		this.addWaypoint(new_image.Lattitude, new_image.Longitude, this.imgManager.imgList.size() - 1);
 
 	}
