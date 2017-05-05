@@ -4,12 +4,25 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Path;
 
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -49,10 +62,18 @@ public class Principal extends JFrame implements ActionListener {
 		panel_L.setLayout(new FlowLayout());
 		panel_L.setBackground(Color.lightGray);
 		panel_L.setPreferredSize(new Dimension(200, 300));
+		//setContentPane(panel_L);
 
 		panel_scroll_l.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		panel_scroll_l.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
+		/*for(int i=0; i<current_map.getImgManager().liste.length;i++){
+			 
+			BufferedImage wPic = ImageIO.read(current_map.getImgList().get(i).file);
+			JLabel wIcon = new JLabel(new ImageIcon(wPic));
+			panel_L.add(wIcon);
+			
+		}
+		*/
 		// panel de droite
 
 		panel_R.setBackground(Color.lightGray);
@@ -61,7 +82,7 @@ public class Principal extends JFrame implements ActionListener {
 		// frame
 
 		add(current_map.getMap());
-		add(panel_scroll_l, BorderLayout.WEST);
+		add(panel_L, BorderLayout.WEST);
 		add(panel_R, BorderLayout.EAST);
 
 		add(panel_Down, BorderLayout.SOUTH);
@@ -82,11 +103,11 @@ public class Principal extends JFrame implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			if (source == buttonExit){
+				this.setVisible(false);
+				dispose();
+			}
 
-		}
-		if (source == buttonExit){
-			this.setVisible(false);
-			dispose();
 		}
 	}
 

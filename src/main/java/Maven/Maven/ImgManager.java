@@ -15,14 +15,14 @@ public class ImgManager  {
 	public static final File DIR_DATA_FILE = new File(DIR_DATA_NAME);
 	
 	public ArrayList<Img> imgList;
-
+	public String[] liste;
 
 	public ImgManager() {
 		this.imgList = new ArrayList<Img>();
 		File dossier;
 		try {
 			dossier = new File("Donnees").getCanonicalFile();
-			String[] liste = dossier.list();
+			this.liste = dossier.list();
 			for (int i = 0; i < liste.length; i++) {
 				if (liste[i].endsWith(".jpg") || liste[i].endsWith(".gif") || liste[i].endsWith(".png")
 						|| liste[i].endsWith(".bnp") || liste[i].endsWith(".tif")) {
