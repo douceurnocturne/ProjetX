@@ -2,6 +2,7 @@ package Maven.Maven;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -12,14 +13,24 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 
 public class Principal extends JFrame implements ActionListener {
+    ImageIcon[] images;
+    String[] petStrings = {"Bird", "Cat", "Dog", "Rabbit", "Pig"};
 
 	static Map current_map;
 
@@ -69,7 +80,19 @@ public class Principal extends JFrame implements ActionListener {
 
 		panel_R.setBackground(Color.lightGray);
 		panel_R.setPreferredSize(new Dimension(200, 300));
-
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		final JComboBox combo=new JComboBox();
+		combo.setModel(populate());
+		combo.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent arg0){
+				String name=((ImagesNText)combo.getSelectedItem()).getName();
+				JOptionPane.showMessageDialog(null, null);
+				
+			}
+		});
+		panel_R.add(combo);
+		
 		// frame
 		
 		add(current_map.getMap(), BorderLayout.CENTER);
@@ -81,12 +104,21 @@ public class Principal extends JFrame implements ActionListener {
 		setSize(1000, 1000);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-
+	}
 		
+	
+	private DefaultComboBoxModel populate(){
+		DefaultComboBoxModel model=new DefaultComboBoxModel();
+		model.addElement(new ImagesNText(new ImageIcon("C:\\images\\fond.jpg"),"fond"));
+		model.addElement(new ImagesNText(new ImageIcon("C:\\images\\fond1.jpg"),"fond1"));
+		model.addElement(new ImagesNText(new ImageIcon("C:\\images\\fond2.jpg"),"fond2"));
+		
+		return model;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		//String name=((ImagesNText)combo.getSelectedItem()).getName();
 		Object source = e.getSource();
 
 		if (source == buttonAdd) {
@@ -107,6 +139,7 @@ public class Principal extends JFrame implements ActionListener {
 		
 		
 	}
+	
 
 	public static void main(String[] args) {
 
@@ -115,6 +148,7 @@ public class Principal extends JFrame implements ActionListener {
 			public void run() {
 				try {
 					new Principal().setVisible(true);
+					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -122,6 +156,49 @@ public class Principal extends JFrame implements ActionListener {
 			}
 		});
 	}
+class ImagesTextRenderer extends JLabel implements ListCellRenderer{
+	
 
+	@Override
+	public Component getListCellRendererComponent(JList list, Object val, int index, boolean isSelected,boolean focused){
+		// TODO Auto-generated method stub
+		ImagesNText it=(ImagesNText) val;
+		setIcon(it.getImg());
+		setText(it.getName());
+		if(isSelected){
+			setBackground(list.getSelectionBackground());
+			setForeground(list.getSelectionForeground());
+		}else{
+			setBackground(list.getBackground());
+			setForeground(list.getForeground());
+		}
+		setFont(list.getFont());
+		return this;
+	}
+	}
 	
 }
+class ImagesNText{
+	private Icon img;
+	private String name;
+	public ImagesNText(Icon img,String name){
+		this.img=img;
+		this.name=name;
+	}
+	public Icon getImg() {
+		return img;
+	}
+	public void setImg(Icon img) {
+		this.img = img;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+}
+
+	
+
+
