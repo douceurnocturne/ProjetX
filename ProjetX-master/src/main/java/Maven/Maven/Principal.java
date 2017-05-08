@@ -25,7 +25,7 @@ public class Principal extends JFrame implements ActionListener {
 	
 	private static JPanel panel_R = new JPanel();
 
-	private JScrollPane panel_L = new JScrollPane();
+	private JPanel panel_L = new JPanel();
 
 	private JPanel panel_Down = new JPanel();
 	
@@ -91,11 +91,6 @@ public class Principal extends JFrame implements ActionListener {
 		if (source == buttonAdd) {
 			try {
 				this.current_map.addImg();
-				remove(panel_L);
-				this.panel_L = transformImgListIntoJScroll.method(current_map.getImgList(), current_map);
-				this.add(panel_L);
-				this.repaint();
-				this.revalidate();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

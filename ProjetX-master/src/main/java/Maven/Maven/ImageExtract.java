@@ -20,9 +20,6 @@ import com.drew.metadata.exif.GpsDirectory;
 
 public class ImageExtract {
 
-	// Methode qui ouvre un gestionaire de fichier permetant de selectionner une
-	// image
-	// qui sera convertis en format img
 	public static Img LoadImage() throws IOException {
 		File repertoireCourant = null;
 		try {
@@ -43,40 +40,21 @@ public class ImageExtract {
 		try {
 			monimage = new Img(f, getLatitude(f), getLongitude(f));
 		} catch (java.lang.ArrayIndexOutOfBoundsException e) {
-			// si l'image n'a pas de coordonées gps ont lui ajoute 0,0
 			monimage = new Img(f, 0, 0);
 		}
 		InputStream input = new FileInputStream(f);
 		File dossier;
-		try {// Si l'image existe deja dans le dossier
+		try {//Si l'image existe deja dans le dossier
 			dossier = new File("Donnees").getCanonicalFile();
 			String[] liste = dossier.list();
-			int i = 0;
-
-			boolean contain = false;
+			int i=0;
 			while (i < liste.length) {
-				// si l'image existe déjà dans notre img manager
-				if (liste[i].equals(name)) {
-					contain = true;
+				if(liste[i].equals(name)){
+					String[] prefixe = name.split("\\.");
+					name = prefixe[0].concat("(copie)").concat(".").concat(prefixe[1]);
 				}
 				i++;
 			}
-			if (contain == true) {
-				int j = 0;
-				int cpt = 0;
-				while (j < liste.length) {
-					String[] prefixe = name.split("\\.");
-					if (liste[j].startsWith(prefixe[0])) {
-						cpt = cpt + 1;
-					}
-					j++;
-				}
-				String[] prefixe = name.split("\\.");
-				String stri = String.valueOf(cpt);
-				String stri2 = "(".concat(stri).concat(")");
-				name = prefixe[0].concat(stri2).concat(".").concat(prefixe[1]);
-			}
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -85,9 +63,7 @@ public class ImageExtract {
 		return monimage;
 	}
 
-	// Méthode qui récupère la coordonée latitude et la convertis en degrees
 	public static float getLatitude(File file) {
-
 		String latitude = "";
 		try {
 			Metadata metadata = ImageMetadataReader.readMetadata(file);
@@ -106,12 +82,13 @@ public class ImageExtract {
 			System.out.println("erreur 3");
 		}
 		// convertion dms to dd:
-		latitude = latitude.replace(',', '.');
-		// parfois les coordonnees ont des virgules
 		String[] tab0 = latitude.split("°");
 		tab0[1] = tab0[1].substring(1, tab0[1].length());
 		String[] tab1 = tab0[1].split("'");
 		tab1[1] = tab1[1].substring(1, tab1[1].length() - 1);
+		tab0[0]=tab0[0].replace(',', '.');
+		tab1[0]=tab0[0].replace(',', '.');
+		tab1[1]=tab0[0].replace(',', '.');
 		float Degree = Float.parseFloat(tab0[0]);
 		float Minute = Float.parseFloat(tab1[0]);
 		float Second = Float.parseFloat(tab1[1]);
@@ -119,7 +96,6 @@ public class ImageExtract {
 		return DD;
 	}
 
-	// Méthode qui récupère la coordonée longitude et la convertis en degrees
 	public static float getLongitude(File file) {
 		String longitude = "";
 		try {
@@ -139,14 +115,13 @@ public class ImageExtract {
 			System.out.println("erreur 3");
 		}
 		// convertion dms to dd:
-		longitude = longitude.replace(',', '.');
-		// parfois les coordonnees ont des virgules
-
 		String[] tab0 = longitude.split("°");
 		tab0[1] = tab0[1].substring(1, tab0[1].length());
 		String[] tab1 = tab0[1].split("'");
 		tab1[1] = tab1[1].substring(1, tab1[1].length() - 1);
-
+		tab0[0]=tab0[0].replace(',', '.');
+		tab1[0]=tab0[0].replace(',', '.');
+		tab1[1]=tab0[0].replace(',', '.');
 		float Degree = Float.parseFloat(tab0[0]);
 		float Minute = Float.parseFloat(tab1[0]);
 		float Second = Float.parseFloat(tab1[1]);
