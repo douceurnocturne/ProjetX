@@ -20,6 +20,9 @@ import com.drew.metadata.exif.GpsDirectory;
 
 public class ImageExtract {
 
+	// Methode qui ouvre un gestionaire de fichier permetant de selectionner une
+	// image
+	// qui sera convertis en format img
 	public static Img LoadImage() throws IOException {
 		File repertoireCourant = null;
 		try {
@@ -40,6 +43,7 @@ public class ImageExtract {
 		try {
 			monimage = new Img(f, getLatitude(f), getLongitude(f));
 		} catch (java.lang.ArrayIndexOutOfBoundsException e) {
+			// si l'image n'a pas de coordonées gps ont lui ajoute 0,0
 			monimage = new Img(f, 0, 0);
 		}
 		InputStream input = new FileInputStream(f);
@@ -49,6 +53,7 @@ public class ImageExtract {
 			String[] liste = dossier.list();
 			int i = 0;
 			while (i < liste.length) {
+				// si l'image existe déjà dans notre img manager
 				if (liste[i].equals(name)) {
 					String[] prefixe = name.split("\\.");
 					name = prefixe[0].concat("(copie)").concat(".").concat(prefixe[1]);
@@ -63,6 +68,7 @@ public class ImageExtract {
 		return monimage;
 	}
 
+	// Méthode qui récupère la coordonée latitude et la convertis en degrees
 	public static float getLatitude(File file) {
 		String latitude = "";
 		try {
@@ -82,6 +88,8 @@ public class ImageExtract {
 			System.out.println("erreur 3");
 		}
 		// convertion dms to dd:
+		latitude.replace(',', '.');
+		// parfois les coordonnees ont des virgules
 		String[] tab0 = latitude.split("°");
 		tab0[1] = tab0[1].substring(1, tab0[1].length());
 		String[] tab1 = tab0[1].split("'");
@@ -93,6 +101,7 @@ public class ImageExtract {
 		return DD;
 	}
 
+	// Méthode qui récupère la coordonée longitude et la convertis en degrees
 	public static float getLongitude(File file) {
 		String longitude = "";
 		try {
@@ -112,6 +121,8 @@ public class ImageExtract {
 			System.out.println("erreur 3");
 		}
 		// convertion dms to dd:
+		longitude.replace(',', '.');
+		// parfois les coordonnees ont des virgules
 		String[] tab0 = longitude.split("°");
 		tab0[1] = tab0[1].substring(1, tab0[1].length());
 		String[] tab1 = tab0[1].split("'");

@@ -14,6 +14,8 @@ public class ImgManager extends JPanel {
 
 	public ArrayList<Img> imgList;
 
+	// Parcours le dossier est initialiste la liste des img avec
+	// toute les images présente dans le dossier
 	public ImgManager() {
 		this.imgList = new ArrayList<Img>();
 		File dossier;
@@ -28,6 +30,25 @@ public class ImgManager extends JPanel {
 					float lat = ImageExtract.getLongitude(f);
 					Img im = new Img(f, lon, lat);
 					this.imgList.add(im);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// vérifie que l'utilisateur n'a pas ajouter d'image dans le dossier Donnees
+	// a la fermeture du logiciel
+	public void DataBaseClosed(ArrayList<Img> listImg) {
+		File dossier;
+		try {
+			dossier = new File("Donnees").getCanonicalFile();
+			String[] liste = dossier.list();
+			for (int i = 0; i < liste.length; i++) {
+				File f = new File(DIR_DATA_FILE, liste[i]).getCanonicalFile();
+				Img image = new Img(f, ImageExtract.getLatitude(f), ImageExtract.getLongitude(f));
+				if (!(listImg.contains(image))) {
+					f.delete();
 				}
 			}
 		} catch (IOException e) {
