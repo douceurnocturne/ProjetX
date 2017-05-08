@@ -20,16 +20,9 @@ import com.drew.metadata.exif.GpsDirectory;
 
 public class ImageExtract {
 
-<<<<<<< HEAD
-//	public static void main(String[] args) throws IOException {
-//		Img bonsoir = LoadImage();
-//	}
-
-=======
 	// Methode qui ouvre un gestionaire de fichier permetant de selectionner une
 	// image
 	// qui sera convertis en format img
->>>>>>> b813f70974d0df820eaaf6e02bad7c829865f1f6
 	public static Img LoadImage() throws IOException {
 		File repertoireCourant = null;
 		try {
@@ -77,7 +70,7 @@ public class ImageExtract {
 
 	// Méthode qui récupère la coordonée latitude et la convertis en degrees
 	public static float getLatitude(File file) {
-		
+
 		String latitude = "";
 		try {
 			Metadata metadata = ImageMetadataReader.readMetadata(file);
@@ -96,19 +89,12 @@ public class ImageExtract {
 			System.out.println("erreur 3");
 		}
 		// convertion dms to dd:
-<<<<<<< HEAD
-
-=======
-		latitude.replace(',', '.');
+		latitude = latitude.replace(',', '.');
 		// parfois les coordonnees ont des virgules
->>>>>>> b813f70974d0df820eaaf6e02bad7c829865f1f6
 		String[] tab0 = latitude.split("°");
 		tab0[1] = tab0[1].substring(1, tab0[1].length());
 		String[] tab1 = tab0[1].split("'");
 		tab1[1] = tab1[1].substring(1, tab1[1].length() - 1);
-		tab0[0]=tab0[0].replace(',', '.');
-		tab1[0]=tab1[0].replace(',', '.');
-		tab1[1]=tab1[1].replace(',', '.');
 		float Degree = Float.parseFloat(tab0[0]);
 		float Minute = Float.parseFloat(tab1[0]);
 		float Second = Float.parseFloat(tab1[1]);
@@ -136,19 +122,14 @@ public class ImageExtract {
 			System.out.println("erreur 3");
 		}
 		// convertion dms to dd:
-<<<<<<< HEAD
-
-=======
-		longitude.replace(',', '.');
+		longitude = longitude.replace(',', '.');
 		// parfois les coordonnees ont des virgules
->>>>>>> b813f70974d0df820eaaf6e02bad7c829865f1f6
+
 		String[] tab0 = longitude.split("°");
 		tab0[1] = tab0[1].substring(1, tab0[1].length());
 		String[] tab1 = tab0[1].split("'");
 		tab1[1] = tab1[1].substring(1, tab1[1].length() - 1);
-		tab0[0]=tab0[0].replace(',', '.');
-		tab1[0]=tab1[0].replace(',', '.');
-		tab1[1]=tab1[1].replace(',', '.');
+
 		float Degree = Float.parseFloat(tab0[0]);
 		float Minute = Float.parseFloat(tab1[0]);
 		float Second = Float.parseFloat(tab1[1]);
