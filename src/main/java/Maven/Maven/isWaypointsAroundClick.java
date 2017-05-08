@@ -10,7 +10,7 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.LinearRing;
 
-public class isWaypointsAroundClick {
+public class IsWaypointsAroundClick {
 
 	public static void check(Map _map, Point _mousePosition, ArrayList<CustomDefaultWaypoint> clickWaypointResults) {
 
