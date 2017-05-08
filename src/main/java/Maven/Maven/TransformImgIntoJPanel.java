@@ -13,7 +13,7 @@ public class TransformImgIntoJPanel {
 		JPanel panel = new JPanel();
 		panel.add(CustomComboBoxDemo.createAndShowGUI(_map.getImgWaypointsResult()));
 		panel.setBackground(Color.lightGray);
-		panel.setPreferredSize(new Dimension(200, 300));
+		panel.setPreferredSize(new Dimension(300, 200));
 		
 		return panel;
 	}

@@ -2,43 +2,57 @@ package Maven.Maven;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 public class Principal extends JFrame implements ActionListener {
-	static Map current_map;
-	
-	private JButton buttonAdd = new JButton("Ajouter Image");
-	
-	private JButton buttonExit = new JButton("Quitter");
-	
-	private static JPanel panel_R = new JPanel();
+    ImageIcon[] images;
+    String[] petStrings = {"Bird", "Cat", "Dog", "Rabbit", "Pig"};
 
-	private JScrollPane panel_L = new JScrollPane();
+	static Map current_map;
+
+	private JButton buttonAdd = new JButton("Ajouter Image");
+	private JButton buttonExit = new JButton("Quitter");
+
+	private JPanel panel_R = new JPanel();
 
 	private JPanel panel_Down = new JPanel();
+	private JScrollPane panel_L;
 	
-	private JScrollPane panel_scroll_l = new JScrollPane(panel_L);
-
+	
+	
 	public Principal() throws IOException {
 
 		// map
 		current_map = new Map();
 		
-		 
 		
-		// Panel du bas avec des boutons
+		this.panel_L = transformImgListIntoJScroll.method(current_map.getImgList(), current_map);
 
 		panel_Down.setLayout(new FlowLayout());
 		panel_Down.setBackground(Color.blue);
@@ -49,53 +63,59 @@ public class Principal extends JFrame implements ActionListener {
 		buttonExit.addActionListener(this);
 
 		// panel de gauche
-		panel_L.setLayout(new FlowLayout());
-		panel_L.setBackground(Color.lightGray);
-		panel_L.setPreferredSize(new Dimension(200, 300));
+		
 
-		panel_scroll_l.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		panel_scroll_l.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
+		
 		// panel de droite
+
 		panel_R=TransformImgIntoJPanel.method(current_map);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
+		
 		// frame
-		
 		add(current_map.getMap(), BorderLayout.CENTER);
+	
 		
-		add(panel_scroll_l, BorderLayout.WEST);
+		add(panel_L, BorderLayout.WEST);
 		add(panel_R, BorderLayout.EAST);
-		
 
 		add(panel_Down, BorderLayout.SOUTH);
-		setSize(1000, 1000);
+		
+		setSize(1600, 1000);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
+
 		current_map.getMap().getMainMap().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-			remove(panel_R);
-			
-			add(panel_R);
-			
+				remove(panel_R);
+				panel_R=TransformImgIntoJPanel.method(current_map);
+				add(panel_R, BorderLayout.EAST);
+				revalidate();
+				repaint();
+				
 				
 			}
-		});
+		}); 
+		
+		
 	}
-
+		
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//String name=((ImagesNText)combo.getSelectedItem()).getName();
 		Object source = e.getSource();
+
 		if (source == buttonAdd) {
 			try {
 				this.current_map.addImg();
-				remove(panel_L);
+				this.remove(panel_L);
 				this.panel_L = transformImgListIntoJScroll.method(current_map.getImgList(), current_map);
-				this.add(panel_L);
+				this.add(panel_L, BorderLayout.WEST);
 				this.repaint();
 				this.revalidate();
+				
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -106,16 +126,20 @@ public class Principal extends JFrame implements ActionListener {
 			this.setVisible(false);
 			dispose();
 		}
-
+		
+		
+		
+		
 	}
+	
 
 	public static void main(String[] args) {
+
 		// java.awt.EventQueue. ou SwingUtilities
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					new Principal().setVisible(true);
-				    
 					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
@@ -124,8 +148,5 @@ public class Principal extends JFrame implements ActionListener {
 			}
 		});
 	}
-}
-
 	
-
-
+}
