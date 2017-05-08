@@ -20,10 +20,16 @@ import com.drew.metadata.exif.GpsDirectory;
 
 public class ImageExtract {
 
+<<<<<<< HEAD
 //	public static void main(String[] args) throws IOException {
 //		Img bonsoir = LoadImage();
 //	}
 
+=======
+	// Methode qui ouvre un gestionaire de fichier permetant de selectionner une
+	// image
+	// qui sera convertis en format img
+>>>>>>> b813f70974d0df820eaaf6e02bad7c829865f1f6
 	public static Img LoadImage() throws IOException {
 		File repertoireCourant = null;
 		try {
@@ -44,16 +50,18 @@ public class ImageExtract {
 		try {
 			monimage = new Img(f, getLatitude(f), getLongitude(f));
 		} catch (java.lang.ArrayIndexOutOfBoundsException e) {
+			// si l'image n'a pas de coordonées gps ont lui ajoute 0,0
 			monimage = new Img(f, 0, 0);
 		}
 		InputStream input = new FileInputStream(f);
 		File dossier;
-		try {//Si l'image existe deja dans le dossier
+		try {// Si l'image existe deja dans le dossier
 			dossier = new File("Donnees").getCanonicalFile();
 			String[] liste = dossier.list();
-			int i=0;
+			int i = 0;
 			while (i < liste.length) {
-				if(liste[i].equals(name)){
+				// si l'image existe déjà dans notre img manager
+				if (liste[i].equals(name)) {
 					String[] prefixe = name.split("\\.");
 					name = prefixe[0].concat("(copie)").concat(".").concat(prefixe[1]);
 				}
@@ -67,6 +75,7 @@ public class ImageExtract {
 		return monimage;
 	}
 
+	// Méthode qui récupère la coordonée latitude et la convertis en degrees
 	public static float getLatitude(File file) {
 		
 		String latitude = "";
@@ -87,7 +96,12 @@ public class ImageExtract {
 			System.out.println("erreur 3");
 		}
 		// convertion dms to dd:
+<<<<<<< HEAD
 
+=======
+		latitude.replace(',', '.');
+		// parfois les coordonnees ont des virgules
+>>>>>>> b813f70974d0df820eaaf6e02bad7c829865f1f6
 		String[] tab0 = latitude.split("°");
 		tab0[1] = tab0[1].substring(1, tab0[1].length());
 		String[] tab1 = tab0[1].split("'");
@@ -102,6 +116,7 @@ public class ImageExtract {
 		return DD;
 	}
 
+	// Méthode qui récupère la coordonée longitude et la convertis en degrees
 	public static float getLongitude(File file) {
 		String longitude = "";
 		try {
@@ -121,7 +136,12 @@ public class ImageExtract {
 			System.out.println("erreur 3");
 		}
 		// convertion dms to dd:
+<<<<<<< HEAD
 
+=======
+		longitude.replace(',', '.');
+		// parfois les coordonnees ont des virgules
+>>>>>>> b813f70974d0df820eaaf6e02bad7c829865f1f6
 		String[] tab0 = longitude.split("°");
 		tab0[1] = tab0[1].substring(1, tab0[1].length());
 		String[] tab1 = tab0[1].split("'");
