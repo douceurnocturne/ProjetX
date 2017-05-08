@@ -31,7 +31,7 @@ class MyComponent extends JComponent implements MouseListener {
 		// appel de la méthode check de la classe 
 		// regarder s'il y a des waypoints à côté du clic
 		// et mettre à jour la liste clickWaypointsResults
-		IsWaypointsAroundClick.check(this.current_map, mousePosition_Point, this.clickWaypointResults);
+		isWaypointsAroundClick.check(this.current_map, mousePosition_Point, this.clickWaypointResults);
 
 		if (!clickWaypointResults.isEmpty()) {
 			System.out.println("Un waypoint a été trouvé à proximité");
