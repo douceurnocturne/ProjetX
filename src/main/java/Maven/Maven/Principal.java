@@ -3,6 +3,7 @@ package Maven.Maven;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -27,6 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 public class Principal extends JFrame implements ActionListener {
     ImageIcon[] images;
@@ -39,14 +41,11 @@ public class Principal extends JFrame implements ActionListener {
 
 	private JTabbedPane panel_R = new JTabbedPane();
 
-	private JPanel panel_L = new JPanel();
-
 	private JPanel panel_Down = new JPanel();
+	private JScrollPane panel_L;
 	
 	
 	
-	private JScrollPane panel_scroll_l = new JScrollPane(panel_L);
-
 	public Principal() throws IOException {
 
 		// map
@@ -59,6 +58,8 @@ public class Principal extends JFrame implements ActionListener {
 		}); pour marc */
 		
 		// Panel du bas avec des boutons
+		
+		this.panel_L = transformImgListIntoJScroll.method(current_map.getImgList(), current_map);
 
 		panel_Down.setLayout(new FlowLayout());
 		panel_Down.setBackground(Color.blue);
@@ -69,13 +70,9 @@ public class Principal extends JFrame implements ActionListener {
 		buttonExit.addActionListener(this);
 
 		// panel de gauche
-		panel_L.setLayout(new FlowLayout());
-		panel_L.setBackground(Color.lightGray);
-		panel_L.setPreferredSize(new Dimension(200, 300));
+		
 
-		panel_scroll_l.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		panel_scroll_l.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-
+		
 		// panel de droite
 
 		panel_R.setBackground(Color.lightGray);
@@ -94,16 +91,19 @@ public class Principal extends JFrame implements ActionListener {
 		panel_R.add(combo);
 		
 		// frame
-		
 		add(current_map.getMap(), BorderLayout.CENTER);
+	
 		
-		add(panel_scroll_l, BorderLayout.WEST);
+		add(panel_L, BorderLayout.WEST);
 		add(panel_R, BorderLayout.EAST);
 
 		add(panel_Down, BorderLayout.SOUTH);
-		setSize(1000, 1000);
+		
+		setSize(1600, 1000);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		
+	
 	}
 		
 	
@@ -124,6 +124,9 @@ public class Principal extends JFrame implements ActionListener {
 		if (source == buttonAdd) {
 			try {
 				this.current_map.addImg();
+				this.panel_L = transformImgListIntoJScroll.method(current_map.getImgList(), current_map);
+				
+				
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -159,7 +162,6 @@ public class Principal extends JFrame implements ActionListener {
 class ImagesTextRenderer extends JLabel implements ListCellRenderer{
 	
 
-	@Override
 	public Component getListCellRendererComponent(JList list, Object val, int index, boolean isSelected,boolean focused){
 		// TODO Auto-generated method stub
 		ImagesNText it=(ImagesNText) val;

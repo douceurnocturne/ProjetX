@@ -24,6 +24,7 @@ public class Map {
 	private Component clickOnMap;
 	private ArrayList<CustomDefaultWaypoint> clickWaypointResults; 
 	private ArrayList<Img> ImgWaypointsResults;
+	private Img lastImgAdded;
 	// Liste qui contient
 																	// les
 																	// résultats
@@ -124,11 +125,14 @@ public class Map {
 
 		Img new_image = ImageExtract.LoadImage();
 		this.imgManager.imgList.add(new_image);
-		System.out.println("latitude");
-		System.out.println("longitude");
+		this.lastImgAdded=new_image;
 
 		this.addWaypoint(new_image.Lattitude, new_image.Longitude, this.imgManager.imgList.size() - 1);
 
+	}
+	
+	public Img getLastImg() {
+		return this.lastImgAdded;
 	}
 
 	public void centerImg(GeoPosition pos) { // permet de centrer à la position
