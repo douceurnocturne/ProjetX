@@ -18,6 +18,7 @@ import com.drew.metadata.Metadata;
 import com.drew.metadata.exif.GpsDescriptor;
 import com.drew.metadata.exif.GpsDirectory;
 
+
 public class ImageExtract {
 
 	// Methode qui ouvre un gestionaire de fichier permetant de selectionner une
@@ -52,13 +53,28 @@ public class ImageExtract {
 			dossier = new File("Donnees").getCanonicalFile();
 			String[] liste = dossier.list();
 			int i = 0;
+			boolean contain = false;
 			while (i < liste.length) {
 				// si l'image existe déjà dans notre img manager
 				if (liste[i].equals(name)) {
-					String[] prefixe = name.split("\\.");
-					name = prefixe[0].concat("(copie)").concat(".").concat(prefixe[1]);
+					contain=true;
 				}
 				i++;
+			}
+			if (contain==true){
+				int j = 0;
+				int cpt = 0;
+				while (j < liste.length) {
+					String[] prefixe = name.split("\\.");
+					if (liste[j].startsWith(prefixe[0])) {
+						cpt=cpt+1;
+					}
+					j++;
+				}	
+				String[] prefixe = name.split("\\.");
+				String stri = String.valueOf(cpt);
+				String stri2 = "(".concat(stri).concat(")");
+				name = prefixe[0].concat(stri2).concat(".").concat(prefixe[1]);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

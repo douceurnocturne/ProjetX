@@ -124,7 +124,11 @@ public class Principal extends JFrame implements ActionListener {
 		if (source == buttonAdd) {
 			try {
 				this.current_map.addImg();
+				this.remove(panel_L);
 				this.panel_L = transformImgListIntoJScroll.method(current_map.getImgList(), current_map);
+				this.add(panel_L, BorderLayout.WEST);
+				this.repaint();
+				this.revalidate();
 				
 				
 			} catch (IOException e1) {
