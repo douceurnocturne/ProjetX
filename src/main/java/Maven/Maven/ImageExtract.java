@@ -19,7 +19,7 @@ import com.drew.metadata.exif.GpsDescriptor;
 import com.drew.metadata.exif.GpsDirectory;
 
 public class ImageExtract {
-	
+
 	public static Img LoadImage() throws IOException {
 		File repertoireCourant = null;
 		try {
@@ -44,12 +44,12 @@ public class ImageExtract {
 		}
 		InputStream input = new FileInputStream(f);
 		File dossier;
-		try {//Si l'image existe deja dans le dossier
+		try {// Si l'image existe deja dans le dossier
 			dossier = new File("Donnees").getCanonicalFile();
 			String[] liste = dossier.list();
-			int i=0;
+			int i = 0;
 			while (i < liste.length) {
-				if(liste[i].equals(name)){
+				if (liste[i].equals(name)) {
 					String[] prefixe = name.split("\\.");
 					name = prefixe[0].concat("(copie)").concat(".").concat(prefixe[1]);
 				}
