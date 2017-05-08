@@ -3,9 +3,6 @@ package Maven.Maven;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
 
 import javax.swing.JPanel;
 
@@ -31,23 +28,6 @@ public class ImgManager extends JPanel {
 					float lat = ImageExtract.getLongitude(f);
 					Img im = new Img(f, lon, lat);
 					this.imgList.add(im);
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void DataBaseClosed(ArrayList<Img> listImg) {
-		File dossier;
-		try {
-			dossier = new File("Donnees").getCanonicalFile();
-			String[] liste = dossier.list();
-			for (int i = 0; i < liste.length; i++) {
-				File f = new File(DIR_DATA_FILE, liste[i]).getCanonicalFile();
-				Img image = new Img(f, ImageExtract.getLatitude(f), ImageExtract.getLongitude(f));
-				if (!(listImg.contains(image))) {
-					f.delete();
 				}
 			}
 		} catch (IOException e) {
