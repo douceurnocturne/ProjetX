@@ -32,7 +32,7 @@ import javax.swing.UIManager;
 
 public class Principal extends JFrame implements ActionListener {
     ImageIcon[] images;
-    String[] petStrings = {"Bird", "Cat", "Dog", "Rabbit", "Pig"};
+    
 
 	static Map current_map;
 
@@ -84,6 +84,7 @@ public class Principal extends JFrame implements ActionListener {
 		setSize(1600, 1000);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		setTitle("Application de Localisation d'Images");
 		
 
 		current_map.getMap().getMainMap().addMouseListener(new MouseAdapter() {
