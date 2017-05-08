@@ -37,7 +37,7 @@ public class ImgManager {
 
 	// vérifie que l'utilisateur n'a pas ajouter d'image dans le dossier Donnees
 	// a la fermeture du logiciel
-	public void DataBaseClosed(ArrayList<Img> listImg) {
+	public static void DataBaseClosed(ArrayList<Img> listImg) {
 		File dossier;
 		try {
 			dossier = new File("Donnees").getCanonicalFile();
