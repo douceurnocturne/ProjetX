@@ -17,14 +17,13 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 public class Principal extends JFrame implements ActionListener {
-
+	
 	static Map current_map;
 
 	private JButton buttonAdd = new JButton("Ajouter Image");
 	private JButton buttonExit = new JButton("Quitter");
 
 	private JPanel panel_R = new JPanel();
-
 	private JPanel panel_Down = new JPanel();
 	private JScrollPane panel_L;
 
@@ -33,7 +32,7 @@ public class Principal extends JFrame implements ActionListener {
 		// map
 		current_map = new Map();
 
-		this.panel_L = transformImgListIntoJScroll.method(current_map.getImgList(), current_map);
+		panel_L = transformImgListIntoJScroll.method(current_map.getImgList(), current_map);
 
 		panel_Down.setLayout(new FlowLayout());
 		panel_Down.setBackground(Color.blue);
@@ -43,25 +42,20 @@ public class Principal extends JFrame implements ActionListener {
 		buttonAdd.addActionListener(this);
 		buttonExit.addActionListener(this);
 
-		// panel de gauche
-
-		// panel de droite
-
 		panel_R = TransformImgIntoJPanel.method(current_map);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
 
 		// frame
 		add(current_map.getMap(), BorderLayout.CENTER);
-
 		add(panel_L, BorderLayout.WEST);
 		add(panel_R, BorderLayout.EAST);
-
 		add(panel_Down, BorderLayout.SOUTH);
 
 		setSize(1600, 1000);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setTitle("Application de Localisation d'Images");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		current_map.getMap().getMainMap().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {

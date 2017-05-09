@@ -21,20 +21,14 @@ public class CustomComboBoxDemo extends JPanel {
 
 	public CustomComboBoxDemo(ArrayList<Img> imgList) {
 
-		// Load the pet images and create an array of indexes.
 		images = new ImageIcon[imgList.size()];
 		Integer[] intArray = new Integer[imgList.size()];
 		for (int i = 0; i < imgList.size(); i++) {
 			intArray[i] = new Integer(i);
 			String path = imgList.get(i).file.getAbsolutePath();
-			ImageIcon imageIcon = new ImageIcon(path); // load the image to a
-														// imageIcon
-			Image image = imageIcon.getImage(); // transform it
-			Image newimg = image.getScaledInstance(300, 200, java.awt.Image.SCALE_SMOOTH); // scale
-																							// it
-																							// the
-																							// smooth
-																							// way
+			ImageIcon imageIcon = new ImageIcon(path); 
+			Image image = imageIcon.getImage(); // transforme l'image
+			Image newimg = image.getScaledInstance(300, 200, java.awt.Image.SCALE_SMOOTH); 
 			imageIcon = new ImageIcon(newimg);
 			images[i] = imageIcon;
 
@@ -45,7 +39,6 @@ public class CustomComboBoxDemo extends JPanel {
 		petList.setRenderer(renderer);
 		petList.setMaximumRowCount(3);
 
-		// Lay out the demo.
 		add(petList, BorderLayout.PAGE_START);
 		setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
@@ -61,9 +54,6 @@ public class CustomComboBoxDemo extends JPanel {
 	}
 
 	public static JComponent createAndShowGUI(ArrayList<Img> imgList) {
-		// Create and set up the window.
-
-		// Create and set up the content pane.
 		JComponent newContentPane = new CustomComboBoxDemo(imgList);
 		return newContentPane;
 	}
@@ -78,13 +68,10 @@ public class CustomComboBoxDemo extends JPanel {
 		}
 
 		/*
-		 * This method finds the image and text corresponding to the selected
-		 * value and returns the label, set up to display the text and image.
+		 * Classe permettant de selectionner l'image dans la JcomboBox.
 		 */
 		public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
 				boolean cellHasFocus) {
-			// Get the selected index. (The index param isn't
-			// always valid, so just use the value.)
 			if (!list.isSelectionEmpty()) {
 				int selectedIndex = ((Integer) value).intValue();
 
@@ -96,7 +83,6 @@ public class CustomComboBoxDemo extends JPanel {
 					setForeground(list.getForeground());
 				}
 
-				// Set the icon and text. If icon was null, say so.
 				ImageIcon icon = images[selectedIndex];
 				setIcon(icon);
 				if (icon != null) {
@@ -109,13 +95,5 @@ public class CustomComboBoxDemo extends JPanel {
 			}
 		}
 
-		// Set the font and text when no image was found.
-		protected void setUhOhText(String uhOhText, Font normalFont) {
-			if (uhOhFont == null) { // lazily create this font
-				uhOhFont = normalFont.deriveFont(Font.ITALIC);
-			}
-			setFont(uhOhFont);
-
-		}
 	}
 }
