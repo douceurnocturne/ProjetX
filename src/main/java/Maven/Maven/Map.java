@@ -3,7 +3,6 @@ package Maven.Maven;
 import java.awt.Component;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -22,16 +21,16 @@ public class Map {
 	private CustomPainter painter;
 	private ImgManager imgManager; // ImgManager qui contient la liste des Img
 	private Component clickOnMap;
-	private ArrayList<CustomDefaultWaypoint> clickWaypointResults; 
+	private ArrayList<CustomDefaultWaypoint> clickWaypointResults;
 	private ArrayList<Img> ImgWaypointsResults;
 	private Img lastImgAdded;
 	// Liste qui contient
-																	// les
-																	// résultats
-																	// (CustomDefaultWaypoint
-																	// d'un clic
-																	// sur la
-																	// map)
+	// les
+	// résultats
+	// (CustomDefaultWaypoint
+	// d'un clic
+	// sur la
+	// map)
 
 	public Map() {
 
@@ -46,10 +45,10 @@ public class Map {
 
 		this.map = new JXMapKit();
 		this.map.setDefaultProvider(JXMapKit.DefaultProviders.OpenStreetMaps);
-		
-		Component clic_on_map = new MyComponent(this, this.clickWaypointResults);		
+
+		Component clic_on_map = new MyComponent(this, this.clickWaypointResults);
 		this.map.getMainMap().addMouseListener(((MouseListener) clic_on_map));
-		
+
 		this.painter = new CustomPainter();
 		this.map.getMainMap().setOverlayPainter(painter);
 		this.init();
@@ -85,18 +84,18 @@ public class Map {
 																		// clic
 		return this.clickWaypointResults;
 	}
-	
+
 	public ArrayList<Img> getImgWaypointsResult() {
 		this.ImgWaypointsResults = new ArrayList<Img>();
-		
-		for (int i=0; i<this.getClickWaypointResult().size(); i++) {
+
+		for (int i = 0; i < this.getClickWaypointResult().size(); i++) {
 			int current_key = this.getClickWaypointResult().get(i).getKey();
 			this.ImgWaypointsResults.add(this.getImgList().get(current_key));
 		}
-		
+
 		return this.ImgWaypointsResults;
 	}
-	
+
 	public void addWaypoint(double coord_x, double coord_y, int key) { // ajoute
 																		// un
 																		// waypoint
@@ -125,12 +124,12 @@ public class Map {
 
 		Img new_image = ImageExtract.LoadImage();
 		this.imgManager.imgList.add(new_image);
-		this.lastImgAdded=new_image;
+		this.lastImgAdded = new_image;
 
 		this.addWaypoint(new_image.Lattitude, new_image.Longitude, this.imgManager.imgList.size() - 1);
 
 	}
-	
+
 	public Img getLastImg() {
 		return this.lastImgAdded;
 	}

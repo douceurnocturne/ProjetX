@@ -23,23 +23,14 @@ class MyComponent extends JComponent implements MouseListener {
 
 	public void mouseClicked(MouseEvent clic) {
 
-		// on récupère les coordonnées de là où on 
-		//clic sur la map
-		Point mousePosition_Point = current_map.getMap().getMousePosition(); 
-		
-																				
-		// appel de la méthode check de la classe 
+		// on récupère les coordonnées de là où on
+		// clic sur la map
+		Point mousePosition_Point = current_map.getMap().getMousePosition();
+
+		// appel de la méthode check de la classe
 		// regarder s'il y a des waypoints à côté du clic
 		// et mettre à jour la liste clickWaypointsResults
 		isWaypointsAroundClick.check(this.current_map, mousePosition_Point, this.clickWaypointResults);
-
-		if (!clickWaypointResults.isEmpty()) {
-			System.out.println("Un waypoint a été trouvé à proximité");
-
-		} else {
-			System.out.println("Aucun waypoint à proximité");
-
-		}
 
 	}
 
