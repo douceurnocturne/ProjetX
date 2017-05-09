@@ -31,9 +31,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 public class Principal extends JFrame implements ActionListener {
-    ImageIcon[] images;
-    String[] petStrings = {"Bird", "Cat", "Dog", "Rabbit", "Pig"};
-
+   
 	static Map current_map;
 
 	private JButton buttonAdd = new JButton("Ajouter Image");
