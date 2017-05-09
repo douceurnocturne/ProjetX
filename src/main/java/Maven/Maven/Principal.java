@@ -31,7 +31,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 public class Principal extends JFrame implements ActionListener {
-   
+
 	static Map current_map;
 
 	private JButton buttonAdd = new JButton("Ajouter Image");
@@ -41,15 +41,12 @@ public class Principal extends JFrame implements ActionListener {
 
 	private JPanel panel_Down = new JPanel();
 	private JScrollPane panel_L;
-	
-	
-	
+
 	public Principal() throws IOException {
 
 		// map
 		current_map = new Map();
-		
-		
+
 		this.panel_L = transformImgListIntoJScroll.method(current_map.getImgList(), current_map);
 
 		panel_Down.setLayout(new FlowLayout());
@@ -61,47 +58,41 @@ public class Principal extends JFrame implements ActionListener {
 		buttonExit.addActionListener(this);
 
 		// panel de gauche
-		
 
-		
 		// panel de droite
 
-		panel_R=TransformImgIntoJPanel.method(current_map);
+		panel_R = TransformImgIntoJPanel.method(current_map);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-		
+
 		// frame
 		add(current_map.getMap(), BorderLayout.CENTER);
-	
-		
+
 		add(panel_L, BorderLayout.WEST);
 		add(panel_R, BorderLayout.EAST);
 
 		add(panel_Down, BorderLayout.SOUTH);
-		
+
 		setSize(1600, 1000);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
-		
+		setTitle("Application de Localisation d'Images");
 
 		current_map.getMap().getMainMap().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
 				remove(panel_R);
-				panel_R=TransformImgIntoJPanel.method(current_map);
+				panel_R = TransformImgIntoJPanel.method(current_map);
 				add(panel_R, BorderLayout.EAST);
 				revalidate();
 				repaint();
-				
-				
+
 			}
-		}); 
-		
-		
+		});
+
 	}
-		
+
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		//String name=((ImagesNText)combo.getSelectedItem()).getName();
+		// String name=((ImagesNText)combo.getSelectedItem()).getName();
 		Object source = e.getSource();
 
 		if (source == buttonAdd) {
@@ -112,24 +103,19 @@ public class Principal extends JFrame implements ActionListener {
 				this.add(panel_L, BorderLayout.WEST);
 				this.repaint();
 				this.revalidate();
-				
-				
+
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
 		}
-		if (source == buttonExit){
+		if (source == buttonExit) {
 			this.setVisible(false);
 			dispose();
 		}
-		
-		
-		
-		
+
 	}
-	
 
 	public static void main(String[] args) {
 
@@ -138,7 +124,7 @@ public class Principal extends JFrame implements ActionListener {
 			public void run() {
 				try {
 					new Principal().setVisible(true);
-					
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -146,9 +132,5 @@ public class Principal extends JFrame implements ActionListener {
 			}
 		});
 	}
-	
+
 }
-
-	
-
-
